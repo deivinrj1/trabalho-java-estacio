@@ -1,0 +1,25 @@
+@Repository
+public class ClienteRepository {
+    @Autowired
+    private EntityManager entityManager;
+
+    public void save(Cliente cliente) {
+        entityManager.persist(cliente);
+    }
+
+    public List<Cliente> findAll() {
+        return entityManager.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
+    }
+
+    public Cliente findById(int id) {
+        return entityManager.find(Cliente.class, id);
+    }
+
+    public void update(Cliente cliente) {
+        entityManager.merge(cliente);
+    }
+
+    public void delete(Cliente cliente) {
+        entityManager.remove(cliente);
+    }
+}
